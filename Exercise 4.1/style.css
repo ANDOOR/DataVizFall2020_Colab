@@ -1,0 +1,41 @@
+
+div {
+  margin: auto;
+  width: 35%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+}
+
+
+.center{
+	border: 1px solid black;
+	
+	width: 80%;
+	padding:10px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
+  
+  
+}
+
+
+table.main {
+    margin-left:auto; 
+    margin-right:auto;
+	border-spacing: 0 15px;
+  }
+
+
+  input{
+	border: 0;
+    border-bottom: 2px solid #D3D3D3;
+  
+  }
+
+
+  input.largerCheckbox { 
+            width: 20px; 
+            height: 20px; 
+			
+        } 
