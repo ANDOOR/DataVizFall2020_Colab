@@ -24,15 +24,15 @@
             width = 960 - margins_left - margins_right;
          height = 500 - margins_top - margins_bottom;
    
-   
-   */margins = 80;
+   */
+   margins = 80;
    width = 900 - 2 * margins;
    height = 800 - 2 * margins;
    padding = 90;
 
   // let svg = d3.selectAll('svg')
    
-   stackcolors = ["b33040", "#d25c4d", "#f2b447", "#d9d574"]
+   stackcolors = ["#b33040", "#d25c4d", "#f2b447", "#d9d574"]
 
 
    keys = ['EstimatedCost', 'RawMaterial', 'Workmanship','YearlyStorage'];
@@ -49,9 +49,10 @@
 
                data.forEach(function(d) {
                d.date = d.date;
-               d.Workmanship = +d.Workmanship;
+               
                d.EstimatedCost = +d.EstimatedCost;
                d.RawMaterial = +d.RawMaterial;
+               d.Workmanship = +d.Workmanship;
                d.YearlyStorage = +d.YearlyStorage;
             });
 
