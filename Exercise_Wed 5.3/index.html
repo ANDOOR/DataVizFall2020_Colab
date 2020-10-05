@@ -7,14 +7,14 @@
 </head>
 <body>
 
-<div width="100%">
-    <svg id="main" width="100%" height="100%" viewBox="0 0 1000 800">
+<div width="50%">
+    <svg id="main" width="75%" height="75%" viewBox="0 0 1000 800">
     </svg>
 </div>
 <script>
-        let margins = 80;
-    let width = 900 - 2 * margins;
-    let height = 800 - 2 * margins;
+        let margins = 30;
+    let width = 600 - 2 * margins;
+    let height = 300 - 2 * margins;
   let svg = d3.selectAll('svg')
    
    stackcolors = ["#b33040", "#d25c4d", "#f2b447", "#d9d574"]
@@ -54,13 +54,16 @@
             .domain([0, d3.max(stackedSeries, d => d3.max(d, d => d[1]))]);
             
     
-        
+            var xAxis = d3.scaleLinear()
+            //.domain([0, d3.max(stackedSeries, d => d3.max(d, d => d[1]))])
+            .domain(d3.extent(data, function(d) { return parseTime(d.date); }))
+            .range([margins, width]);
 
             
 
         let area = d3.area()
         .x(function(d, i) {
-            return i * 50;
+            return i * 45;
         })
         .y0(function(d) {
             return yAxis(d[0]);
@@ -78,18 +81,11 @@
         })
         .attr('d', area)
 
-       /* svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-               .call(d3.axisBottom(xAxis).ticks(12).tickFormat(d3.timeFormat(xFormat)))
-               .selectAll("text")
-               .attr("y", 0)
-               .attr("x", 8)
-               .attr("dy", ".25em")
-               .attr("transform", "rotate(45)")
-               .style("text-anchor", "start");*/
+       
 
         svg.append("g")
-               .call(d3.axisLeft(yAxis))
+                
+               .call(d3.axisLeft(yAxis).ticks(12))
 
             }
 
