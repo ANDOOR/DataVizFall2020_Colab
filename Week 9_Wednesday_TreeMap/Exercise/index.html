@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <script src="../libs/echarts.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>
+        Tree Map
+    </title>
+</head>
+<body style="height: 150%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript">
+let data=[
+        {"parentColumn": "",  "childColumn":"A"},
+        {"parentColumn": "A", "childColumn":"B"},
+        {"parentColumn": "A", "childColumn":"C"},
+        {"parentColumn": "B", "childColumn":"D","val":60},
+        {"parentColumn": "B", "childColumn":"E","val":80},
+        {"parentColumn": "C", "childColumn":"F","val":70},
+        {"parentColumn": "C", "childColumn":"G","val":80},
+        {"parentColumn": "C", "childColumn":"H","val":50}
+    ]
+
+    let stratify_function = d3.stratify()
+        .id(d => d["childColumn"])
+        .parentId(d => d["parentColumn"])
+
+    let data_formatted = stratify_function(data)
+    //console.log(data_formatted)
+    function convertData(d) {
+        if (d.children === undefined) {
+            return {"name": d.id, "value": d.data.val}
+        } else {
+            let children = []
+            for (let i in d.children) {
+                children[i] = convertData(d.children[i]);
+            }
+            return {"name": d.id, "children": children}
+        }
+    }
+    let dataChanged = [convertData(data_formatted)];
+   
+    let treeMap = echarts.init(document.getElementById("container")); 
+    treeMap.setOption({             
+        series: [
+            {
+                type: 'treemap', 
+                data: dataChanged,     
+                
+                label: {        // show or hide labels
+                    show: true,
+                    formatter: '{b}'
+                },
+
+                itemStyle: {
+                    //color: 'blue',
+                            normal: {
+                                borderWidth: 3,
+                                borderColor: 'black',
+                                
+                            }
+                        },
+                levels: [
+                {
+                    itemStyle: {
+                        borderWidth: 3,
+                        borderColor: '#333',
+                        gapWidth: 3
+                    }
+                },
+                    {
+                        color: ['Red', 'blue'],
+                    colorMappingBy: 'value',
+                    itemStyle: {
+                        gapWidth: 1
+                    }
+                    }
+                ],
+
+                
+                
+            }
+        ]
+    
+    
+        
+    },  true);
+</script>
+</body>
+</html>
