@@ -117,7 +117,6 @@ axis
 
 }
 
-// https://stackoverflow.com/questions/38633082/d3-getting-invert-value-of-band-scales
 function scaleBandInvert(scale) {
 let domain = scale.domain();
 let paddingOuter = scale(domain[0]);
