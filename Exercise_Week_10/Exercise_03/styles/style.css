@@ -14,7 +14,7 @@ circle{
     font-size: 50pt;
     font-family: sans-serif;
     text-anchor: middle;
-    color: black;
+    color: blue;
     'z-index': 1001;
 }
 .label{
